@@ -2,10 +2,8 @@ package gachon.project.withus.controller.dto;
 
 import lombok.Data;
 
-//게시글 DTO
-//DB그대로 사용
 @Data
-public class BoardDTO {
+public class GetNdhelpDetailResponseDTO {
     //pk, auto_increment
     private String board_id;
     //글쓴이 이름
@@ -16,8 +14,6 @@ public class BoardDTO {
     private String board_content;
     //글쓴 시간 (default currenttime)
     private String board_event_time;
-    //삭제여부(0 = false(삭제됨), 1 = true(삭제안됨)) default 1
-    private String board_deleteYN;
     //카테고리(노약자, 어린이 등등)
     private String board_category;
     //봉사 시작일

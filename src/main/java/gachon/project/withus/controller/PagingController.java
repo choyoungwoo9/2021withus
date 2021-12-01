@@ -1,12 +1,11 @@
 package gachon.project.withus.controller;
 
 import gachon.project.withus.controller.dao.IBoardDao;
+import gachon.project.withus.controller.dto.BoardDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,37 +15,44 @@ public class PagingController {
 
     @Autowired
     private IBoardDao IBoardDao;
+
     //게시판 조회
-
     @RequestMapping("/board/list")
-    public @ResponseBody String board_detail() throws Exception{
+    public @ResponseBody List<BoardDTO> board_list() throws Exception{
 
-        System.out.println(IBoardDao.list());
+        List<BoardDTO> list = IBoardDao.list();
 
-        return "list";
+        return list;
     }
+    //게시판 글 내용보기
     @GetMapping("/board/select/{id}")
-    public @ResponseBody String board_select(@PathVariable String id) throws Exception{
+    public @ResponseBody BoardDTO board_select(@PathVariable String id) throws Exception{
 
-        System.out.println(IBoardDao.view(id));
+        BoardDTO BoardDTO = IBoardDao.view(id);
+        System.out.println(BoardDTO);
 
-        return "select";
+        return BoardDTO;
     }
     //게시판 글 등록
-    @RequestMapping("/board/post")
-    public @ResponseBody String board_post() throws Exception{
+    @PostMapping("/board/post")
+    public  @ResponseBody List<BoardDTO> board_post(@RequestBody BoardDTO dto) throws Exception{
 
-        System.out.println(IBoardDao.write
-                ("조영우", "조영우타이틀", "조영우 내용", "노약자"));
-        System.out.println(IBoardDao.list());
-        return "post";
+        //request로 받음
+        System.out.println(dto);
+        
+        IBoardDao.write("조영우", "조영우타이틀", "조영우 내용", "노약자");
+        List<BoardDTO> list = IBoardDao.list();
+
+        return list;
     }
     //게시판 삭제
-    @RequestMapping("/board/delete")
-    public @ResponseBody String board_delete() throws Exception{
+    @PostMapping("/board/delete")
+    public @ResponseBody List<BoardDTO> board_delete(@RequestBody BoardDTO dto) throws Exception{
+
         System.out.println(IBoardDao.delete("2"));
-        System.out.println(IBoardDao.list());
-        return "delete";
+        List<BoardDTO> list = IBoardDao.list();
+
+        return list;
     }
     //게시판 수정
     @RequestMapping("/board/put")
