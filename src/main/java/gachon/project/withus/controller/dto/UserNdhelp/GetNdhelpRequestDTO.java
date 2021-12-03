@@ -1,8 +1,10 @@
 package gachon.project.withus.controller.dto.UserNdhelp;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class GetNdhelpRequestDTO {
     //카테고리(노약자, 어린이 등등)
     private String board_category;

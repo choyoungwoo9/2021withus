@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="gachon.project.withus.controller.dao.IIndexDAO">
+    <select id="index_list" resultType="gachon.project.withus.controller.dto.UserIndex.GetIndexResponseDTO">
+        select board_id, board_title, board_writer, board_category from board where board_deleteYN = 1 order by board_id desc limit 6;
+    </select>
+
+</mapper>
+

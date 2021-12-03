@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="gachon.project.withus.controller.dao.INdhelpDAO">
+    <select id="ndhelp_list" resultType="gachon.project.withus.controller.dto.UserNdhelp.GetNdhelpResponseDTO">
+        select board_id, board_writer, board_title from board where board_deleteYN = 1 AND board_category = #{board_category} limit #{start_index}, #{end_index}
+    </select>
+
+    <select id="ndhelpdetail_view" resultType="gachon.project.withus.controller.dto.UserNdhelp.GetNdhelpDetailResponseDTO">
+        select * from board where board_id=#{param1} AND board_deleteYN = 1
+    </select>
+
+    <select id="ndhelpdetail_put_view" resultType="gachon.project.withus.controller.dto.UserNdhelp.GetNdhelpDetailPutResponseDTO">
+        select * from board where board_id=#{param1} AND board_deleteYN = 1
+    </select>
+
+    <update id="ndhelpdetail_put">
+        update board set board_writer = #{board_writer}, board_title= #{board_title}, board_content= #{board_content}, Board_category= #{board_category}, board_start_date= #{board_start_date}, board_end_date= #{board_end_date}, board_lat= #{board_lat}, board_lng= #{board_lng}, board_addr= #{board_addr}, board_region1Depth= #{board_region1Depth}, board_region2Depth= #{board_region2Depth} where board_id=#{board_id}
+    </update>
+
+    <insert id="ndhelp_write">
+        insert into board( board_writer, board_title, board_content, Board_category, board_start_date, board_end_date, board_lat, board_lng, board_addr, board_region1Depth, board_region2Depth)
+        values(#{board_writer}, #{board_title}, #{board_content}, #{board_category}, #{board_start_date}, #{board_end_date}, #{board_lat}, #{board_lng}, #{board_addr}, #{board_region1Depth}, #{board_region2Depth})
+    </insert>
+
+    <delete id="ndhelp_delete">
+        update board set board_deleteYN = 0 where board_id = #{param1}
+    </delete>
+
+</mapper>
+

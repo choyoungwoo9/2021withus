@@ -12,8 +12,6 @@ public class PostNdhelpDetailPutRequestDTO {
     private String board_title;
     //글 내용
     private String board_content;
-    //글쓴 시간 (default currenttime)
-    private String board_event_time;
     //카테고리(노약자, 어린이 등등)
     private String board_category;
     //봉사 시작일
