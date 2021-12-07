@@ -7,8 +7,6 @@ import lombok.RequiredArgsConstructor;
 
 @Data
 public class PostNdhelpWriteRequestDTO {
-    //pk, auto_increment
-    private String board_id;
     //글쓴이 이름
     private String board_writer;
     //게시글 제목

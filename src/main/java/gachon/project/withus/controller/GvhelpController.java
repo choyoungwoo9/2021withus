@@ -5,12 +5,14 @@ import gachon.project.withus.controller.dto.UserGvhelp.GetGvhelpRequestDTO;
 import gachon.project.withus.controller.dto.UserGvhelp.GetGvhelpResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
+@CrossOrigin
 @Controller
 public class GvhelpController {
     @Autowired IGvhelpDAO IGvhelpDAO;
@@ -22,6 +24,8 @@ public class GvhelpController {
             @RequestParam(value = "board_addr") String board_addr,
             @RequestParam(value = "board_region1Depth") String board_region1Depth,
             @RequestParam(value = "board_region2Depth") String board_region2Depth) throws Exception{
+
+        System.out.println("메소드 : get /gvhelp board_lat : "+board_lat+"board_lng : "+board_lng+"board_addr : "+board_addr+"board_region1Depth : "+board_region1Depth+"board_region2Depth : "+board_region2Depth);
 
         GetGvhelpRequestDTO requestDTO = new GetGvhelpRequestDTO(board_lat, board_lng, board_addr, board_region1Depth, board_region2Depth);
         List<GetGvhelpResponseDTO> list = IGvhelpDAO.gvhelp_list(requestDTO);

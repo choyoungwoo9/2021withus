@@ -8,7 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
+@CrossOrigin
 @Controller
 public class NdhelpController {
 
@@ -20,9 +22,9 @@ public class NdhelpController {
             @RequestParam(value = "board_category") String board_category,
             @RequestParam(value = "page") String page,
             @RequestParam(value = "keyword") String keyword) throws Exception{
-        GetNdhelpRequestDTO RequestDTO = new GetNdhelpRequestDTO(board_category, page, keyword);
 
-        System.out.println("어린이"+RequestDTO.getBoard_category());
+        System.out.println("메소드 : get /ndhelp 카테고리 : "+board_category+"page : "+page+"keyword : "+keyword);
+        GetNdhelpRequestDTO RequestDTO = new GetNdhelpRequestDTO(board_category, page, keyword);
 
         List<GetNdhelpResponseDTO> list = INdhelpDAO.ndhelp_list(RequestDTO.getBoard_category(),((Integer.parseInt(RequestDTO.getPage())-1)*9), (Integer.parseInt(RequestDTO.getPage())*9), RequestDTO.getKeyword());
         
@@ -35,6 +37,8 @@ public class NdhelpController {
     public @ResponseBody
     GetNdhelpDetailResponseDTO get_ndhelp_detail(
             @RequestParam(value = "board_id") String board_id) throws Exception{
+
+        System.out.println("메소드 : get /ndhelp/detail board_id"+board_id);
         GetNdhelpDetailRequestDTO RequestDTO = new GetNdhelpDetailRequestDTO(board_id);
         GetNdhelpDetailResponseDTO ResponseDTO = INdhelpDAO.ndhelpdetail_view(Integer.parseInt(RequestDTO.getBoard_id()));
         return ResponseDTO;
@@ -45,6 +49,9 @@ public class NdhelpController {
     public @ResponseBody
     GetNdhelpDetailPutResponseDTO get_ndhelp_detail_put(
             @RequestParam(value = "board_id") String board_id) throws Exception{
+
+        System.out.println("메소드 : get /ndhelp/detail/put +"+"board_id : "+board_id);
+
         GetNdhelpDetailPutRequestDTO RequestDTO = new GetNdhelpDetailPutRequestDTO(board_id);
 
         GetNdhelpDetailPutResponseDTO ResponseDTO = INdhelpDAO.ndhelpdetail_put_view(Integer.parseInt(RequestDTO.getBoard_id()));
@@ -55,7 +62,7 @@ public class NdhelpController {
     @PostMapping("/ndhelp/detail/put")
     public @ResponseBody
     int post_ndhelp_detail_put(@RequestBody PostNdhelpDetailPutRequestDTO RequestDTO) throws Exception{
-        System.out.println(RequestDTO);
+        System.out.println("메소드 : post /ndhelp/detail/put +"+RequestDTO);
         int check = INdhelpDAO.ndhelpdetail_put(RequestDTO.getBoard_id(), RequestDTO.getBoard_writer(), RequestDTO.getBoard_title(), RequestDTO.getBoard_content(), RequestDTO.getBoard_category(), RequestDTO.getBoard_start_date(), RequestDTO.getBoard_end_date(), RequestDTO.getBoard_lat(), RequestDTO.getBoard_lng(), RequestDTO.getBoard_addr(), RequestDTO.getBoard_region1Depth(), RequestDTO.getBoard_region2Depth());
         return check;
     }
@@ -65,6 +72,7 @@ public class NdhelpController {
     public @ResponseBody
     int post_ndhelp_write(@RequestBody PostNdhelpWriteRequestDTO RequestDTO) throws Exception{
 
+        System.out.println("메소드 : post /ndhelp/write +"+RequestDTO);
         int check = INdhelpDAO.ndhelp_write(RequestDTO.getBoard_writer(), RequestDTO.getBoard_title(), RequestDTO.getBoard_content(), RequestDTO.getBoard_category(), RequestDTO.getBoard_start_date(), RequestDTO.getBoard_end_date(), RequestDTO.getBoard_lat(), RequestDTO.getBoard_lng(), RequestDTO.getBoard_addr(), RequestDTO.getBoard_region1Depth(), RequestDTO.getBoard_region2Depth());
         return check;
     }
@@ -73,6 +81,8 @@ public class NdhelpController {
     @PostMapping("/ndhelp/delete")
     public @ResponseBody
     int post_ndhelp_delete(@RequestBody PostNdhelpDeleteRequestDTO RequestDTO) throws Exception{
+
+        System.out.println("메소드 : post /ndhelp/delete +"+RequestDTO);
         int check = INdhelpDAO.ndhelp_delete(RequestDTO.getBoard_id());
         return check;
     }
