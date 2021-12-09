@@ -20,14 +20,22 @@ public class NdhelpController {
     @GetMapping("/ndhelp")
     public @ResponseBody List<GetNdhelpResponseDTO> get_ndhelp(
             @RequestParam(value = "board_category") String board_category,
-            @RequestParam(value = "page") String page,
-            @RequestParam(value = "keyword") String keyword) throws Exception{
+            @RequestParam(value = "page") String page) throws Exception{
 
-        System.out.println("메소드 : get /ndhelp 카테고리 : "+board_category+"page : "+page+"keyword : "+keyword);
-        GetNdhelpRequestDTO RequestDTO = new GetNdhelpRequestDTO(board_category, page, keyword);
+        GetNdhelpRequestDTO RequestDTO = new GetNdhelpRequestDTO(board_category, page);
 
-        List<GetNdhelpResponseDTO> list = INdhelpDAO.ndhelp_list(RequestDTO.getBoard_category(),((Integer.parseInt(RequestDTO.getPage())-1)*9), (Integer.parseInt(RequestDTO.getPage())*9), RequestDTO.getKeyword());
-        
+        if(board_category.equals("전체")){
+            List<GetNdhelpResponseDTO> list = INdhelpDAO.ndhelp_all_list(((Integer.parseInt(RequestDTO.getPage())-1)*9), (Integer.parseInt(RequestDTO.getPage())*9));
+            System.out.println(INdhelpDAO.ndhelp_all_count());
+            return list;
+        }
+
+        System.out.println("메소드 : get /ndhelp 카테고리 : "+board_category+"page : "+page+"전체개시물개수"+INdhelpDAO.ndhelp_count(board_category));
+
+ 
+        List<GetNdhelpResponseDTO> list = INdhelpDAO.ndhelp_list(RequestDTO.getBoard_category(),((Integer.parseInt(RequestDTO.getPage())-1)*9), (Integer.parseInt(RequestDTO.getPage())*9));
+
+        System.out.println(INdhelpDAO.ndhelp_count(board_category));
         //페이징
         return list;
     }
@@ -63,7 +71,7 @@ public class NdhelpController {
     public @ResponseBody
     int post_ndhelp_detail_put(@RequestBody PostNdhelpDetailPutRequestDTO RequestDTO) throws Exception{
         System.out.println("메소드 : post /ndhelp/detail/put +"+RequestDTO);
-        int check = INdhelpDAO.ndhelpdetail_put(RequestDTO.getBoard_id(), RequestDTO.getBoard_writer(), RequestDTO.getBoard_title(), RequestDTO.getBoard_content(), RequestDTO.getBoard_category(), RequestDTO.getBoard_start_date(), RequestDTO.getBoard_end_date(), RequestDTO.getBoard_lat(), RequestDTO.getBoard_lng(), RequestDTO.getBoard_addr(), RequestDTO.getBoard_region1Depth(), RequestDTO.getBoard_region2Depth());
+        int check = INdhelpDAO.ndhelpdetail_put(RequestDTO.getBoard_id(), RequestDTO.getBoard_writer(), RequestDTO.getBoard_title(), RequestDTO.getBoard_content(), RequestDTO.getBoard_category(), RequestDTO.getBoard_start_date(), RequestDTO.getBoard_end_date(), RequestDTO.getBoard_lat(), RequestDTO.getBoard_lng(), RequestDTO.getBoard_addr(), RequestDTO.getBoard_region1Depth(), RequestDTO.getBoard_region2Depth(), RequestDTO.getBoard_ndid());
         return check;
     }
 
@@ -73,7 +81,7 @@ public class NdhelpController {
     int post_ndhelp_write(@RequestBody PostNdhelpWriteRequestDTO RequestDTO) throws Exception{
 
         System.out.println("메소드 : post /ndhelp/write +"+RequestDTO);
-        int check = INdhelpDAO.ndhelp_write(RequestDTO.getBoard_writer(), RequestDTO.getBoard_title(), RequestDTO.getBoard_content(), RequestDTO.getBoard_category(), RequestDTO.getBoard_start_date(), RequestDTO.getBoard_end_date(), RequestDTO.getBoard_lat(), RequestDTO.getBoard_lng(), RequestDTO.getBoard_addr(), RequestDTO.getBoard_region1Depth(), RequestDTO.getBoard_region2Depth());
+        int check = INdhelpDAO.ndhelp_write(RequestDTO.getBoard_writer(), RequestDTO.getBoard_title(), RequestDTO.getBoard_content(), RequestDTO.getBoard_category(), RequestDTO.getBoard_start_date(), RequestDTO.getBoard_end_date(), RequestDTO.getBoard_lat(), RequestDTO.getBoard_lng(), RequestDTO.getBoard_addr(), RequestDTO.getBoard_region1Depth(), RequestDTO.getBoard_region2Depth(), RequestDTO.getBoard_ndid());
         return check;
     }
 
@@ -84,6 +92,16 @@ public class NdhelpController {
 
         System.out.println("메소드 : post /ndhelp/delete +"+RequestDTO);
         int check = INdhelpDAO.ndhelp_delete(RequestDTO.getBoard_id());
+        return check;
+    }
+
+    //유저매칭
+    @PostMapping("/ndhelp/match")
+    public @ResponseBody
+    int post_ndhelp_match(@RequestBody PostNdhelpMatchRequestDTO RequestDTO) throws Exception{
+
+        System.out.println("메소드 : post /ndhelp/match +"+RequestDTO);
+        int check = INdhelpDAO.ndhelp_match(RequestDTO.getBoard_id(), RequestDTO.getBoard_gvid());
         return check;
     }
 }

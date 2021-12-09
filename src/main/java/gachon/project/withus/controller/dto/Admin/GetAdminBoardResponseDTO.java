@@ -1,9 +1,9 @@
-package gachon.project.withus.controller.dto.UserNdhelp;
+package gachon.project.withus.controller.dto.Admin;
 
 import lombok.Data;
 
 @Data
-public class GetNdhelpResponseDTO {
+public class GetAdminBoardResponseDTO {
     //pk, auto_increment
     private String board_id;
     //글쓴이 이름

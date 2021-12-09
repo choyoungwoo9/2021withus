@@ -5,7 +5,19 @@
 
 <mapper namespace="gachon.project.withus.controller.dao.INdhelpDAO">
     <select id="ndhelp_list" resultType="gachon.project.withus.controller.dto.UserNdhelp.GetNdhelpResponseDTO">
-        select board_id, board_writer, board_title from board where board_deleteYN = 1 AND board_category = #{board_category} limit #{start_index}, #{end_index}
+        select board_id, board_writer, board_title, board_category from board where board_deleteYN = 1 AND board_close = 1 AND board_category = #{board_category} limit #{start_index}, #{end_index}
+    </select>
+
+    <select id="ndhelp_count" resultType="int">
+        select count(*) from board where board_deleteYN = 1 AND board_close = 1 AND board_category = #{board_category}
+    </select>
+
+    <select id="ndhelp_all_list" resultType="gachon.project.withus.controller.dto.UserNdhelp.GetNdhelpResponseDTO">
+        select board_id, board_writer, board_title, board_category from board where board_deleteYN = 1 AND board_close = 1 limit #{start_index}, #{end_index}
+    </select>
+
+    <select id="ndhelp_all_count" resultType="int">
+        select count(*) from board where board_deleteYN = 1 AND board_close = 1
     </select>
 
     <select id="ndhelpdetail_view" resultType="gachon.project.withus.controller.dto.UserNdhelp.GetNdhelpDetailResponseDTO">
@@ -17,17 +29,20 @@
     </select>
 
     <update id="ndhelpdetail_put">
-        update board set board_writer = #{board_writer}, board_title= #{board_title}, board_content= #{board_content}, Board_category= #{board_category}, board_start_date= #{board_start_date}, board_end_date= #{board_end_date}, board_lat= #{board_lat}, board_lng= #{board_lng}, board_addr= #{board_addr}, board_region1Depth= #{board_region1Depth}, board_region2Depth= #{board_region2Depth} where board_id=#{board_id}
+        update board set board_writer = #{board_writer}, board_title= #{board_title}, board_content= #{board_content}, Board_category= #{board_category}, board_start_date= #{board_start_date}, board_end_date= #{board_end_date}, board_lat= #{board_lat}, board_lng= #{board_lng}, board_addr= #{board_addr}, board_region1Depth= #{board_region1Depth}, board_region2Depth= #{board_region2Depth}, board_ndid= #{board_ndid} where board_id=#{board_id}
     </update>
 
     <insert id="ndhelp_write">
-        insert into board( board_writer, board_title, board_content, Board_category, board_start_date, board_end_date, board_lat, board_lng, board_addr, board_region1Depth, board_region2Depth)
-        values(#{board_writer}, #{board_title}, #{board_content}, #{board_category}, #{board_start_date}, #{board_end_date}, #{board_lat}, #{board_lng}, #{board_addr}, #{board_region1Depth}, #{board_region2Depth})
+        insert into board( board_writer, board_title, board_content, Board_category, board_start_date, board_end_date, board_lat, board_lng, board_addr, board_region1Depth, board_region2Depth, board_ndid)
+        values(#{board_writer}, #{board_title}, #{board_content}, #{board_category}, #{board_start_date}, #{board_end_date}, #{board_lat}, #{board_lng}, #{board_addr}, #{board_region1Depth}, #{board_region2Depth}, #{board_ndid})
     </insert>
 
     <delete id="ndhelp_delete">
         update board set board_deleteYN = 0 where board_id = #{param1}
     </delete>
 
+    <update id="ndhelp_match">
+        update board set board_close = 0, board_gvid = #{board_gvid} where board_id = #{board_id}
+    </update>
 </mapper>
 

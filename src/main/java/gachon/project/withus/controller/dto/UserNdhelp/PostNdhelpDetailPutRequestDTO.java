@@ -24,4 +24,6 @@ public class PostNdhelpDetailPutRequestDTO {
     private String board_addr;
     private String board_region1Depth;
     private String board_region2Depth;
+
+    private String board_ndid;
 }
