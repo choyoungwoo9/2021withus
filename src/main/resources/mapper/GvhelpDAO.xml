@@ -5,7 +5,7 @@
 
 <mapper namespace="gachon.project.withus.controller.dao.IGvhelpDAO">
     <select id="gvhelp_list" resultType="gachon.project.withus.controller.dto.UserGvhelp.GetGvhelpResponseDTO">
-        select board_id, board_writer, board_title, board_content, board_event_time, board_category, board_start_date, board_end_date, board_lat, board_lng, board_addr, board_region1Depth, board_region2Depth, board_close, board_gvid, board_ndid from board where board_deleteYN = 1 AND board_close = 1
+        select board_id, board_writer, board_title, board_content, board_event_time, board_category, board_start_date, board_end_date, board_lat, board_lng, board_addr, board_region1Depth, board_region2Depth, board_close, board_gvid, board_ndid from board where board_deleteYN = 1
     </select>
 
 </mapper>

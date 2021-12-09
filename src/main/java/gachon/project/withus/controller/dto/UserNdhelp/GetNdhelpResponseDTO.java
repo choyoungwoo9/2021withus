@@ -16,4 +16,6 @@ public class GetNdhelpResponseDTO {
     private String page;
     //전체게시물개수
     private String totalnum;
+    private String board_close;
+    private String board_ndid;
 }

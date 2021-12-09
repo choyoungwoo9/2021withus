@@ -32,7 +32,11 @@ public class MypageController {
         {
             System.out.println("메소드 : get /mypage/log "+"유저 아이디 : "+userid+"모드는 ndlog");
             list = IMypageDAO.getndlog(RequestDTO.getUserid(), ((Integer.parseInt(RequestDTO.getPage())-1)*3), (Integer.parseInt(RequestDTO.getPage())*3));
+            if(list.isEmpty()){
+                return list;
+            }
             GetMypageLogResponseDTO temp;
+            System.out.println(list);
             temp = list.get(0);
             temp.setPage(page);
             temp.setTotalnum(Integer.toString(IMypageDAO.ndlog_count(RequestDTO.getUserid())));
@@ -41,6 +45,9 @@ public class MypageController {
         {
             System.out.println("메소드 : get /mypage/log "+"유저 아이디 : "+userid+"모드는 gvlog");
             list = IMypageDAO.getgvlog(RequestDTO.getUserid(), ((Integer.parseInt(RequestDTO.getPage())-1)*3), (Integer.parseInt(RequestDTO.getPage())*3));
+            if(list.isEmpty()){
+                return list;
+            }
             GetMypageLogResponseDTO temp;
             temp = list.get(0);
             temp.setPage(page);
@@ -50,6 +57,9 @@ public class MypageController {
         {
             System.out.println("메소드 : get /mypage/log "+"유저 아이디 : "+userid+"모드는 alllog");
             list = IMypageDAO.getalllog(RequestDTO.getUserid(), ((Integer.parseInt(RequestDTO.getPage())-1)*3), (Integer.parseInt(RequestDTO.getPage())*3));
+            if(list.isEmpty()){
+                return list;
+            }
             GetMypageLogResponseDTO temp;
             temp = list.get(0);
             temp.setPage(page);
