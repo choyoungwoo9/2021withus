@@ -9,7 +9,7 @@ import java.util.List;
 public interface INdhelpDAO {
     //도움요청에 나오는 리스트
     public List<GetNdhelpResponseDTO> ndhelp_list(String board_category, int start_index, int end_index);
-    //전체 게시물 개수 구하는 메소드
+    //카테고리별 게시물 개수 구하는 메소드
     public int ndhelp_count(String board_category);
     //도움요청에 나오는 리스트(카테고리 : 전체)
     public List<GetNdhelpResponseDTO> ndhelp_all_list(int start_index, int end_index);
@@ -27,4 +27,6 @@ public interface INdhelpDAO {
     public int ndhelp_delete(String board_id);
     //매칭처리
     public int ndhelp_match(String board_id, String board_gvid);
+    //매칭수락처리
+    public int ndhelp_accept(String board_id);
 }

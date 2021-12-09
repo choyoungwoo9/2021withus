@@ -42,7 +42,11 @@
     </delete>
 
     <update id="ndhelp_match">
-        update board set board_close = 0, board_gvid = #{board_gvid} where board_id = #{board_id}
+        update board set board_close = 2, board_gvid = #{board_gvid} where board_id = #{board_id}
+    </update>
+
+    <update id="ndhelp_accept">
+        update board set board_close = 3 where board_id = #{board_id}
     </update>
 </mapper>
 

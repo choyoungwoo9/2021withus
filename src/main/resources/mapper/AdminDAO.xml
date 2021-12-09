@@ -11,6 +11,14 @@
         select board_id, board_writer, board_title, board_category from board where board_deleteYN = 1 AND board_close = 1 limit #{start_index}, #{end_index}
     </select>
 
+    <select id="admin_ndhelp_count" resultType="int">
+        select count(*) from board where board_deleteYN = 1 AND board_close = 1 AND board_category = #{board_category}
+    </select>
+
+    <select id="admin_ndhelp_all_count" resultType="int">
+        select count(*) from board where board_deleteYN = 1 AND board_close = 1
+    </select>
+
     <delete id="admin_board_delete">
         update board set board_deleteYN = 0 where board_id = #{param1}
     </delete>

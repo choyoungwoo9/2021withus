@@ -5,7 +5,7 @@
 
 <mapper namespace="gachon.project.withus.controller.dao.IIndexDAO">
     <select id="index_list" resultType="gachon.project.withus.controller.dto.UserIndex.GetIndexResponseDTO">
-        select board_id, board_title, board_writer, board_category from board where board_deleteYN = 1 order by board_id desc limit 6;
+        select board_id, board_title, board_writer, board_category from board where board_deleteYN = 1 And board_close = 1 order by board_id desc limit 6;
     </select>
 
 </mapper>

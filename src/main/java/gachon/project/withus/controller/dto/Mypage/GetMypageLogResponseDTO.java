@@ -1,9 +1,9 @@
-package gachon.project.withus.controller.dto.UserNdhelp;
+package gachon.project.withus.controller.dto.Mypage;
 
 import lombok.Data;
 
 @Data
-public class GetNdhelpDetailPutResponseDTO {
+public class GetMypageLogResponseDTO {
     //pk, auto_increment
     private String board_id;
     //글쓴이 이름
@@ -30,4 +30,6 @@ public class GetNdhelpDetailPutResponseDTO {
     private String board_ndid;
     private String board_gvid;
     private String board_close;
+    private String page;
+    private String totalnum;
 }

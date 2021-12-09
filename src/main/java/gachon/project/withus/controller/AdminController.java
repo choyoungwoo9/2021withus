@@ -25,12 +25,22 @@ public class AdminController {
 
         if(board_category.equals("전체")){
             System.out.println("메소드 : get /ndhelp 카테고리 : "+board_category+"page : "+page);
-            List<GetAdminBoardResponseDTO> list = IAdminDAO.admin_board_all_list(((Integer.parseInt(RequestDTO.getPage())-1)*9), (Integer.parseInt(RequestDTO.getPage())*9));
+            List<GetAdminBoardResponseDTO> list = IAdminDAO.admin_board_all_list(((Integer.parseInt(RequestDTO.getPage())-1)*10), (Integer.parseInt(RequestDTO.getPage())*10));
+            GetAdminBoardResponseDTO temp;
+            temp = list.get(0);
+            temp.setPage(page);
+            temp.setTotalnum(Integer.toString(IAdminDAO.admin_ndhelp_all_count()));
             return list;
         }
 
         System.out.println("메소드 : get /ndhelp 카테고리 : "+board_category+"page : "+page);
         List<GetAdminBoardResponseDTO> list = IAdminDAO.admin_board_list(RequestDTO.getBoard_category(),((Integer.parseInt(RequestDTO.getPage())-1)*10), (Integer.parseInt(RequestDTO.getPage())*10));
+
+        GetAdminBoardResponseDTO temp;
+        temp = list.get(0);
+        temp.setPage(page);
+        temp.setTotalnum(Integer.toString(IAdminDAO.admin_ndhelp_count(board_category)));
+
         return list;
     }
 

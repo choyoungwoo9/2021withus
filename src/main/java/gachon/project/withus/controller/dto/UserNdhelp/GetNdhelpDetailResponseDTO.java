@@ -25,8 +25,8 @@ public class GetNdhelpDetailResponseDTO {
     //봉사 종료일
     private String board_end_date;
     //위치정보(위도, 경도, 전체주소, level1주소, level2주소)
-    private String board_lat;
-    private String board_lng;
+    private double board_lat;
+    private double board_lng;
     private String board_addr;
     private String board_region1Depth;
     private String board_region2Depth;

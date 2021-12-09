@@ -26,16 +26,19 @@ public class NdhelpController {
 
         if(board_category.equals("전체")){
             List<GetNdhelpResponseDTO> list = INdhelpDAO.ndhelp_all_list(((Integer.parseInt(RequestDTO.getPage())-1)*9), (Integer.parseInt(RequestDTO.getPage())*9));
-            System.out.println(INdhelpDAO.ndhelp_all_count());
+            GetNdhelpResponseDTO temp;
+            temp = list.get(0);
+            temp.setPage(page);
+            temp.setTotalnum(Integer.toString(INdhelpDAO.ndhelp_all_count()));
             return list;
         }
 
         System.out.println("메소드 : get /ndhelp 카테고리 : "+board_category+"page : "+page+"전체개시물개수"+INdhelpDAO.ndhelp_count(board_category));
-
- 
         List<GetNdhelpResponseDTO> list = INdhelpDAO.ndhelp_list(RequestDTO.getBoard_category(),((Integer.parseInt(RequestDTO.getPage())-1)*9), (Integer.parseInt(RequestDTO.getPage())*9));
-
-        System.out.println(INdhelpDAO.ndhelp_count(board_category));
+        GetNdhelpResponseDTO temp;
+        temp = list.get(0);
+        temp.setPage(page);
+        temp.setTotalnum(Integer.toString(INdhelpDAO.ndhelp_count(board_category)));
         //페이징
         return list;
     }
@@ -102,6 +105,16 @@ public class NdhelpController {
 
         System.out.println("메소드 : post /ndhelp/match +"+RequestDTO);
         int check = INdhelpDAO.ndhelp_match(RequestDTO.getBoard_id(), RequestDTO.getBoard_gvid());
+        return check;
+    }
+
+    //매칭수락
+    @PostMapping("/ndhelp/accept")
+    public @ResponseBody
+    int post_ndhelp_accept(@RequestBody PostNdhelpAcceptRequestDTO RequestDTO) throws Exception{
+
+        System.out.println("메소드 : post /ndhelp/accept +"+RequestDTO);
+        int check = INdhelpDAO.ndhelp_accept(RequestDTO.getBoard_id());
         return check;
     }
 }
