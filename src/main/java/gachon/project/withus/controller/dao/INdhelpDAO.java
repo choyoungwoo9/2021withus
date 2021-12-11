@@ -29,4 +29,10 @@ public interface INdhelpDAO {
     public int ndhelp_match(String board_id, String board_gvid);
     //매칭수락처리
     public int ndhelp_accept(String board_id);
+    //매칭거절처리
+    public int ndhelp_deny(String board_id);
+    //채팅방 아이디 받기
+    public GetNdhelpChatidResponseDTO ndhelp_chatid(int board_id);
+    //채팅방 아이디 등록
+    public int ndhelp_post_chatid(String board_id, String board_chatid);
 }

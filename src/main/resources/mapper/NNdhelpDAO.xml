@@ -48,5 +48,17 @@
     <update id="ndhelp_accept">
         update board set board_close = 3 where board_id = #{board_id}
     </update>
+
+    <update id="ndhelp_deny">
+        update board set board_close = 1 where board_id = #{board_id}
+    </update>
+
+    <select id="ndhelp_chatid" resultType="gachon.project.withus.controller.dto.UserNdhelp.GetNdhelpChatidResponseDTO">
+        select board_chatid from board where board_id = #{board_id}
+    </select>
+
+    <update id="ndhelp_post_chatid">
+        update board set board_chatid = #{board_chatid} where board_id = #{board_id}
+    </update>
 </mapper>
 

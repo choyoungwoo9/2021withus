@@ -117,4 +117,38 @@ public class NdhelpController {
         int check = INdhelpDAO.ndhelp_accept(RequestDTO.getBoard_id());
         return check;
     }
+
+    //매칭거절
+    @PostMapping("/ndhelp/deny")
+    public @ResponseBody
+    int post_ndhelp_deny(@RequestBody PostNdhelpDenyRequestDTO RequestDTO) throws Exception{
+
+        System.out.println("메소드 : post /ndhelp/deny +"+RequestDTO);
+        int check = INdhelpDAO.ndhelp_deny(RequestDTO.getBoard_id());
+        return check;
+    }
+
+    //게시글에 채팅방ID추가하기
+    @PostMapping("/ndhelp/chatid")
+    public @ResponseBody
+    int post_ndhelp_chatid(@RequestBody PostNdhelpChatidRequestDTO RequestDTO) throws Exception{
+
+        System.out.println("메소드 : post/ndhelp/chatid +"+RequestDTO);
+        int check = INdhelpDAO.ndhelp_post_chatid(RequestDTO.getBoard_id(), RequestDTO.getBoard_chatid());
+        return check;
+    }
+
+    //게시글의 채팅방ID받기
+    @GetMapping("/ndhelp/chatid")
+    public @ResponseBody
+    GetNdhelpChatidResponseDTO get_ndhelp_chatid(@RequestParam(value = "board_id") String board_id) throws Exception{
+
+        System.out.println("메소드 : get/ndhelp/chatid +"+board_id);
+        GetNdhelpChatidRequestDTO RequestDTO = new GetNdhelpChatidRequestDTO(board_id);
+
+        GetNdhelpChatidResponseDTO ResponseDTO = INdhelpDAO.ndhelp_chatid(Integer.parseInt(RequestDTO.getBoard_id()));
+
+        return ResponseDTO;
+    }
+
 }
