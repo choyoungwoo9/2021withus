@@ -3,10 +3,10 @@ package gachon.project.withus;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@SpringBootTest
 class WithusApplicationTests {
 
-	@Test
+	//@Test
 	void contextLoads() {
 	}
 

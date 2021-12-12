@@ -2,6 +2,8 @@ package gachon.project.withus.controller.dto.UserNdhelp;
 
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
 public class PostNdhelpDetailPutRequestDTO {
     //pk, auto_increment
@@ -15,9 +17,9 @@ public class PostNdhelpDetailPutRequestDTO {
     //카테고리(노약자, 어린이 등등)
     private String board_category;
     //봉사 시작일
-    private String board_start_date;
+    private LocalDateTime board_start_date;
     //봉사 종료일
-    private String board_end_date;
+    private LocalDateTime board_end_date;
     //위치정보(위도, 경도, 전체주소, level1주소, level2주소)
     private String board_lat;
     private String board_lng;
